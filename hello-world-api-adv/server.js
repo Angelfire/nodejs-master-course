@@ -34,37 +34,37 @@ const server = http.createServer((req, res) => {
   });
 
   req.on('end', () => {
-      buffer += decoder.end();
+    buffer += decoder.end();
 
-      // Check the router for a matching path for a handler. If one is not found, use the notFound handler instead.
-      const chosenHandler = typeof(router[trimmedPath]) !== 'undefined' ? router[trimmedPath] : router['notFound'];
+    // Check the router for a matching path for a handler. If one is not found, use the notFound handler instead.
+    const chosenHandler = typeof(router[trimmedPath]) !== 'undefined' ? router[trimmedPath] : router['notFound'];
 
-      // Construct the data object to send to the handler
-      const data = {
-        'trimmedPath' : trimmedPath,
-        'queryStringObject' : queryStringObject,
-        'method' : method,
-        'headers' : headers,
-        'payload' : buffer
-      };
+    // Construct the data object to send to the handler
+    const data = {
+      'trimmedPath' : trimmedPath,
+      'queryStringObject' : queryStringObject,
+      'method' : method,
+      'headers' : headers,
+      'payload' : buffer
+    };
 
-      // Route the request to the handler specified in the router
-      chosenHandler(data, (statusCode, payload) => {
+    // Route the request to the handler specified in the router
+    chosenHandler(data, (statusCode, payload) => {
 
-        // Use the status code returned from the handler, or set the default status code to 200
-        statusCode = typeof(statusCode) === 'number' ? statusCode : 200;
+      // Use the status code returned from the handler, or set the default status code to 200
+      statusCode = typeof(statusCode) === 'number' ? statusCode : 200;
 
-        // Use the payload returned from the handler, or set the default payload to an empty object
-        payload = typeof(payload) === 'object'? payload : {};
+      // Use the payload returned from the handler, or set the default payload to an empty object
+      payload = typeof(payload) === 'object'? payload : {};
 
-        // Convert the payload to a string
-        const payloadString = JSON.stringify(payload);
+      // Convert the payload to a string
+      const payloadString = JSON.stringify(payload);
 
-        // Return the response
-        res.setHeader('Content-Type', 'application/json');
-        res.writeHead(statusCode);
-        res.end(payloadString);
-      });
+      // Return the response
+      res.setHeader('Content-Type', 'application/json');
+      res.writeHead(statusCode);
+      res.end(payloadString);
+    });
   });
 });
 
