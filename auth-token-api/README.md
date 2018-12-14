@@ -42,3 +42,40 @@ Body: {
 Method: "DELETE"
 Path: "/users?phone=1113339991"
 ```
+
+## Instructions for Generating Tokens
+The tokens can be created for existing users (same phone number)
+
+### POST
+```
+Method: "POST"
+Path: "/tokens"
+Body: {
+    "phone": "1113339990", 
+    "password": "password123"
+}
+```
+
+### GET
+It is necessary to use an id of a token that has already been created
+
+```
+Method: "GET"
+Path: "/tokens?id=f9eyesd9voj2qo8dsxhp"
+```
+
+### PUT
+```
+Method: "PUT"
+Path: /tokens
+Body: {
+    id: "f9eyesd9voj2qo8dsxhp",
+    extend: true
+}
+```
+
+### DELETE
+```
+Method: "DELETE"
+Path: /tokens?id=f9eyesd9voj2qo8dsxhp"
+```
