@@ -79,3 +79,29 @@ Body: {
 Method: "DELETE"
 Path: /tokens?id=f9eyesd9voj2qo8dsxhp"
 ```
+
+## Instructions for checks
+### POST
+
+```
+Method: ""
+Path: "/checks"
+Headers: {
+    token: ""
+}
+Body: {
+    "protocol: "http",
+    "url": "google.com",
+    "method" : "GET",
+    "sucessCodes": [200, 201],
+    "timeoutSeconds": 3
+}
+```
+
+### GET
+
+
+### PUT
+
+
+### DELETE
